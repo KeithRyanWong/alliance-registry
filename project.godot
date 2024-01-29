@@ -14,17 +14,9 @@ config/name="TeamRegistry2"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
-[autoload]
-
-AllianceController="*res://addons/AllianceRegistry/AllianceController.tscn"
-
 [dotnet]
 
 project/assembly_name="TeamRegistry2"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/AllianceRegistry/plugin.cfg")
 
 [rendering]
 

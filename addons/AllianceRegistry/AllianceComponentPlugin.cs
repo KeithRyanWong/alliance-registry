@@ -17,7 +17,8 @@ public partial class AllianceComponentPlugin : EditorInspectorPlugin
         
         if (!string.IsNullOrWhiteSpace(allianceComponent.AllyId))
         {
-            allianceComponent.AllyId = allianceComponent.AllyId.ToLower();
+            string sanitizedId = allianceComponent.AllyId.ToLower().Split(' ').Join("");
+            allianceComponent.AllyId = sanitizedId;
         }
 
         var panelScene = GD.Load<PackedScene>("res://addons/AllianceRegistry/AllianceComponentPanel.tscn");
@@ -25,10 +26,6 @@ public partial class AllianceComponentPlugin : EditorInspectorPlugin
         panelInstance.AllianceComponent = allianceComponent;
         AddCustomControl(panelInstance);
     }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-    }
+    
 }
 #endif

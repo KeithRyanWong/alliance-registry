@@ -51,7 +51,6 @@ public partial class AllianceComponentPanel : PanelContainer
     
     public void UpdateOptions(OptionButton optionButton)
     {
-        GD.Print($"trying to update {optionButton}");
         var options = CurrentOptions(optionButton);
         
         foreach (var allyId in AllianceController.AllyIds)
@@ -82,7 +81,6 @@ public partial class AllianceComponentPanel : PanelContainer
     {
         var textEdit = GetNode<TextEdit>("VBoxContainer/HBoxContainer3/AllyIDTextEdit");
         if (string.IsNullOrWhiteSpace(textEdit.Text)) return;
-        GD.Print($"Requesting to add allyid: {textEdit.Text}");
         AllianceController.RegisterAllyId(textEdit.Text);
     }
 

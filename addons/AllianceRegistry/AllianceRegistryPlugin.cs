@@ -31,7 +31,6 @@ public partial class AllianceRegistryPlugin : EditorPlugin
 		if (_allianceComponentPlugin != null)
 		{
 			RemoveInspectorPlugin(_allianceComponentPlugin);
-			_allianceComponentPlugin.Free();
 		}
 	}
 }

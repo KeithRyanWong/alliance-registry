@@ -8,22 +8,15 @@ using Godot.Collections;
 [Tool]
 public partial class AllianceController : Node
 {
-    
+    private const string _savefilePath = "res://addons/AllianceRegistry/AllianceRegistrySave.tres";
     public static AllianceController Instance { get; private set; }
     [Signal]
     public delegate void AllyIdAddedEventHandler();
     
     
-    public Dictionary<string, int> AllyIds
-    {
-        get => _allyIds.Duplicate();
-        private set => _allyIds = value;
-    }
-    public Dictionary<string, Array<string>> Alliances
-    {
-        get => _alliances.Duplicate();
-        private set => _alliances = value;
-    }
+    public Dictionary<string, int> AllyIds => _allyIds.Duplicate();
+
+    public Dictionary<string, Array<string>> Alliances => _alliances.Duplicate();
 
     private Dictionary<string, int> _allyIds;
     private Dictionary<string, Array<string>> _alliances;
@@ -32,23 +25,54 @@ public partial class AllianceController : Node
     {
         base._EnterTree();
         Instance = this;
-        AllyIds = new Dictionary<string, int>();
-        Alliances = new Dictionary<string, Array<string>>();
+
+        LoadData();
+        _allyIds ??= new Dictionary<string, int>();
+        _alliances ??= new Dictionary<string, Array<string>>();
     }
 
-    // Lets hope since this is a singleton that this persists between sessions. It won't sigh, because we unload it ourselves
-    // public void InitializeTeams()
-    // {
-    //     
-    // }
-    // register a team
-    // Register an alliance
-    // destroy an alliance
-    public void RegisterAllyId(string allyId) 
+    public override void _ExitTree()
     {
-        if(AllyIds.ContainsKey(allyId.ToLower())) return;
-        _allyIds.Add(allyId.ToLower(), AllyIds.Count);
-        GD.Print($"AllyIds contains {allyId}: ", AllyIds.ContainsKey(allyId.ToLower()));
+        base._ExitTree();
+        SaveData();
+    }
+
+    private void SaveData()
+    {
+        var newSaveFile = new AllianceRegistrySave();
+        newSaveFile.Alliances = _alliances ?? new Dictionary<string, Array<string>>();
+        newSaveFile.AllyIds = _allyIds ?? new Dictionary<string, int>();
+        ResourceSaver.Save(newSaveFile, _savefilePath);
+    }
+
+    private void LoadData()
+    {
+        if (!ResourceLoader.Exists(_savefilePath))
+        {
+            var newSaveFile = new AllianceRegistrySave();
+            ResourceSaver.Save(newSaveFile, _savefilePath);
+        }
+
+        var saveData = ResourceLoader.Load<AllianceRegistrySave>(_savefilePath);
+        if (saveData is not null)
+        {
+            _allyIds = saveData.AllyIds ?? new Dictionary<string, int>();
+            _alliances = saveData.Alliances ?? new Dictionary<string, Array<string>>();
+        }
+        else
+        {
+            GD.PrintErr("Failed to load AllianceRegistrySave from: ", _savefilePath);
+            _allyIds = new Dictionary<string, int>();
+            _alliances = new Dictionary<string, Array<string>>();
+        }
+    }
+    
+    
+    public void RegisterAllyId(string allyId)
+    {
+        string sanitizedId = allyId.ToLower().Split(' ').Join("");
+        if(AllyIds.ContainsKey(sanitizedId)) return;
+        _allyIds.Add(sanitizedId, AllyIds.Count);
         EmitSignal(SignalName.AllyIdAdded);
     }
 

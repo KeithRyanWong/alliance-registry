@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AllianceRegistrySave" load_steps=2 format=3 uid="uid://bjelpcygo2x5t"]
+
+[ext_resource type="Script" path="res://addons/AllianceRegistry/AllianceRegistrySave.cs" id="1_gxn04"]
+
+[resource]
+script = ExtResource("1_gxn04")
+AllyIds = {}
+Alliances = {}

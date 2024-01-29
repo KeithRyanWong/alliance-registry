@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://co71p4rc18f4c"]
+
+[ext_resource type="Script" path="res://addons/AllianceRegistry/AllianceComponent.cs" id="1_dx4jc"]
+
+[node name="AllianceComponent" type="Node"]
+script = ExtResource("1_dx4jc")

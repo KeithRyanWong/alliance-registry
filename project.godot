@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="TeamRegistry2"
+config/features=PackedStringArray("4.2", "C#", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+AllianceController="*res://addons/AllianceRegistry/AllianceController.tscn"
+
+[dotnet]
+
+project/assembly_name="TeamRegistry2"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AllianceRegistry/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="mobile"

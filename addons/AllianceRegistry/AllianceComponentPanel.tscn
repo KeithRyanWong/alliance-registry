@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://des3vxunan7oe"]
+
+[ext_resource type="Script" path="res://addons/AllianceRegistry/AllianceComponentPanel.cs" id="1_f7njs"]
+
+[node name="AllianceComponentPanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f7njs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(50, 2.08165e-12)
+layout_mode = 2
+text = "Ally ID"
+clip_text = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AllyIDTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Ally Id"
+
+[node name="AddAllyIdButton" type="Button" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Ally ID"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 75)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="OptionButton2" type="OptionButton" parent="VBoxContainer/HBoxContainer2/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="RegisterAlliance" type="Button" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Register Alliance"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Show Alliances"
+
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/MarginContainer2/OptionButton" to="." method="OnItemSelected"]
+[connection signal="ready" from="VBoxContainer/HBoxContainer/MarginContainer2/OptionButton" to="." method="OnOptionButtonReady"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer3/AddAllyIdButton" to="." method="OnAddAllyId"]
+[connection signal="ready" from="VBoxContainer/HBoxContainer2/VBoxContainer/MarginContainer/OptionButton" to="." method="OnOptionButton2Ready"]
+[connection signal="ready" from="VBoxContainer/HBoxContainer2/VBoxContainer/MarginContainer2/OptionButton2" to="." method="OnOptionButton3Ready"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/RegisterAlliance" to="." method="OnRegisterAlliance"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="OnShowAlliances"]

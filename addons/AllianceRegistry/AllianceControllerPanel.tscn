@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://15pmmaq3h34"]
+
+[ext_resource type="Script" path="res://addons/AllianceRegistry/AllianceControllerPanel.cs" id="1_or1m8"]
+
+[node name="AllianceControllerPanel" type="Panel"]
+script = ExtResource("1_or1m8")
